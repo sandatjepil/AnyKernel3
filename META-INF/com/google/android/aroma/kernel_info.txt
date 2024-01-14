@@ -1,11 +1,11 @@
 <@center><b><#selectbg_g>ENGLISH</#></b>
 
-<@center><b><#selectbg_g>TheOneMemory Kernel</#></b>
+<@center><b><#selectbg_g>Meow Kernel</#></b>
 
 <b><#selectbg_g>Some Messages from me :</#></b></@>
 
 <@fill><q>
-TheOneMemory Kernel is made with love by @fakedotkit 
+Meow Kernel is made with love by @sandatjepil 
 which he's trying to give good experience for 
 any users :) .
  
@@ -23,13 +23,13 @@ Thank You for choosing this Kernel !. </q></@>
 
 <@center><b><#selectbg_g>INDONESIA</#></b>
 
-<@center><b><#selectbg_g>Kernel TheOneMemory</#></b>
+<@center><b><#selectbg_g>Kernel Meow</#></b>
 
 <b><#selectbg_g>Sedikit Pesan dari gw :</#></b></@>
 
 <@fill><q>
-Kernel TheOneMemory dibuat dengan cinta dari
-@fakedotkit (ANJING AWOKAWOKAWOK), yang
+Kernel Meow dibuat dengan cinta dari
+@purr (ANJING AWOKAWOKAWOK), yang
 dimana dia mencoba untuk memberikan
 pengalaman terbaik bagi pengguna yg terobsesi ingin menjadi pro player.
  
