@@ -46,7 +46,7 @@ fontresload( "1", "ttf/Rosemary-Regular.ttf", "14" );
 selectbox(
     "Language","<@center><b>\nSelect Language:</b>\n\n</@>","@language","lang.prop",
     "English",	"Use Default English Language.", 1,	        #-- selected.0 = 1     
-    "Indonesia",	"Gunakan Bahasa Indonesia.", 0, 	        #-- selected.0 = 2
+    "Indonesia",	"Gunakan Bahasa Indonesia.", 0 	        #-- selected.0 = 2
 );
 
 if prop("lang.prop","selected.0")=="1" then
@@ -99,7 +99,7 @@ menubox(
 	"<~perfhal.restore>", "<~perfhal.restoreinfo>", "@archive", #-- selected = 2
 	"<~forcedttw>", "<~forceenable.dttw>", "@pen", #-- selected = 3
 	"<~patch.ram>", "<~patchraminfo>", "@apps", #-- selected = 4
-    "<~kernel.about>",    "",    "@info",    #-- selected = 5
+    "<~kernel.about>",    "",    "@info"    #-- selected = 5
 );																															
 
 writetmpfile(
@@ -242,7 +242,8 @@ menubox(
   #-------------------------+------------------------------+-------------#
   
     "<~enable.forcedttw>",    "<~forceenable.dttw>",    "@done",    #-- selected = 1
-    "<~disable.forcedttw>",    "<~removeforced.dttw>",    "@clear"    #-- selected = 2
+    "<~disable.forcedttw>",    "<~forcedisable.dttw>",    "@clear",    #-- selected = 2
+    "<~donothing.forcedttw>",    "<~donothingforce.dttw>",    "@clear"    #-- selected = 3
 );
 
 ini_set("text_next", "<~text_finish>");
@@ -270,13 +271,25 @@ setvar("retstatus",
       "<~forcedttw> <~enabled>."
   )
 );
+
 else
+if prop("dt2wmenu.prop","selected")=="2" then
 writetmpfile(
       #-- Property
 	    "spectrum.prop",
 	  #-- Values
 	    "selected.2=2\n"
     );
+else
+if prop("dt2wmenu.prop","selected")=="3" then
+writetmpfile(
+      #-- Property
+	    "spectrum.prop",
+	  #-- Values
+	    "selected.2=3\n"
+    );
+endif;
+endif;
 
 setvar("retstatus",
   install(
@@ -456,4 +469,3 @@ setvar("retstatus",
 );
 
 endif;
-
