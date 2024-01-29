@@ -692,19 +692,25 @@ if [ "`$BB grep -w "selected.2=1" /tmp/aroma-data/spectrum.prop`" ]; then
 	fi;
 	DTTWScriptFile="/tmp/dttwpatch"
 	DTTWInitFile="/tmp/dttwinit"
-	$BB echo '#! /system/bin/sh' >> $DTTWScriptFile
+	$BB echo '#!/system/bin/sh' >> $DTTWScriptFile
 	$BB echo '' >> $DTTWScriptFile
 	$BB echo '# DT2W Enabler Script by RyuujiX' >> $DTTWScriptFile
+	$BB echo '# Refined by sandatjepil' >> $DTTWScriptFile
 	$BB echo '' >> $DTTWScriptFile
-	$BB echo '# Set Permissions of DT2W' >> $DTTWScriptFile
-	$BB echo 'chmod -R 644 /sys/kernel/touchpanel/dclicknode' >> $DTTWScriptFile
-	$BB echo 'chmod -R 644 /proc/tpd_gesture' >> $DTTWScriptFile
-	$BB echo 'chmod -R 644 /proc/touchpanel/double_tap_enable' >> $DTTWScriptFile
-	$BB echo '# Enable DT2W' >> $DTTWScriptFile
-	$BB echo 'echo "1" > /sys/kernel/touchpanel/dclicknode' >> $DTTWScriptFile
-	$BB echo 'echo "1" > /proc/tpd_gesture' >> $DTTWScriptFile
-	$BB echo 'echo "1" > /proc/touchpanel/double_tap_enable' >> $DTTWScriptFile
+    $BB echo 'if [[ -f "/proc/touchpanel/double_tap_enable" ]]; then' >> $DTTWScriptFile
+    $BB echo '  for dttw in $(find /proc/touchpanel -name "*enable"); do' >> $DTTWScriptFile
+    $BB echo '    chmod -R 644 "$dttw"' >> $DTTWScriptFile
+    $BB echo '    echo 1 > "$dttw"' >> $DTTWScriptFile
+    $BB echo '  done' >> $DTTWScriptFile
+    $BB echo 'elif [[ -f "/sys/kernel/touchpanel/dclicknode" ]]; then' >> $DTTWScriptFile
+    $BB echo '  chmod -R 644 /sys/kernel/touchpanel/dclicknode' >> $DTTWScriptFile
+    $BB echo '  echo 1 > "/sys/kernel/touchpanel/dclicknode"' >> $DTTWScriptFile
+    $BB echo 'elif [[ -f "/proc/tpd_gesture" ]]; then' >> $DTTWScriptFile
+    $BB echo '  chmod -R 644 /proc/tpd_gesture' >> $DTTWScriptFile
+    $BB echo '  echo 1 > "/proc/tpd_gesture"' >> $DTTWScriptFile
+    $BB echo 'fi' >> $DTTWScriptFile
 	$BB echo '# DT2W Enabler Patch Init by RyuujiX' >> $DTTWInitFile
+	$BB echo '# Refined by sandatjepil' >> $DTTWInitFile
 	$BB echo '' >> $DTTWInitFile
 	$BB echo 'on boot' >> $DTTWInitFile
 	$BB echo 'chmod 0644 /proc/tpd_gesture' >> $DTTWInitFile
@@ -734,12 +740,66 @@ if [ "`$BB grep -w "selected.2=1" /tmp/aroma-data/spectrum.prop`" ]; then
     grep "import /vendor/etc/init/hw/init.forcedttw.rc" /vendor/etc/init/hw/init.qcom.rc >/dev/null || sed -i '1,/.*import.*/s/.*import.*/import \/vendor\/etc\/init\/hw\/init.forcedttw.rc\n&/' /vendor/etc/init/hw/init.qcom.rc
 elif [ "`$BB grep -w "selected.2=2" /tmp/aroma-data/spectrum.prop`" ]; then
 	if [ "$REG" = "IDN" ];then
+	ui_print "- Mematikan Paksa DT2W ...";
+	elif [ "$REG" = "EN" ];then
+	ui_print "- Force Disabling DT2W ...";
+	fi;
+	DTTWScriptFile="/tmp/dttwpatch"
+	DTTWInitFile="/tmp/dttwinit"
+	$BB echo '#!/system/bin/sh' >> $DTTWScriptFile
+	$BB echo '' >> $DTTWScriptFile
+	$BB echo '# DT2W Disabler Script by sandatjepil' >> $DTTWScriptFile
+	$BB echo '' >> $DTTWScriptFile
+    $BB echo 'if [[ -f "/proc/touchpanel/double_tap_enable" ]]; then' >> $DTTWScriptFile
+    $BB echo '  for dttw in $(find /proc/touchpanel -name "*enable"); do' >> $DTTWScriptFile
+    $BB echo '    chmod -R 644 "$dttw"' >> $DTTWScriptFile
+    $BB echo '    echo 0 > "$dttw"' >> $DTTWScriptFile
+    $BB echo '  done' >> $DTTWScriptFile
+    $BB echo 'elif [[ -f "/sys/kernel/touchpanel/dclicknode" ]]; then' >> $DTTWScriptFile
+    $BB echo '  chmod -R 644 /sys/kernel/touchpanel/dclicknode' >> $DTTWScriptFile
+    $BB echo '  echo 0 > "/sys/kernel/touchpanel/dclicknode"' >> $DTTWScriptFile
+    $BB echo 'elif [[ -f "/proc/tpd_gesture" ]]; then' >> $DTTWScriptFile
+    $BB echo '  chmod -R 644 /proc/tpd_gesture' >> $DTTWScriptFile
+    $BB echo '  echo 0 > "/proc/tpd_gesture"' >> $DTTWScriptFile
+    $BB echo 'fi' >> $DTTWScriptFile
+	$BB echo '# DT2W Enabler Patch Init by RyuujiX' >> $DTTWInitFile
+	$BB echo '# Refined by sandatjepil' >> $DTTWInitFile
+	$BB echo '' >> $DTTWInitFile
+	$BB echo 'on boot' >> $DTTWInitFile
+	$BB echo 'chmod 0644 /proc/tpd_gesture' >> $DTTWInitFile
+	$BB echo 'write /proc/tpd_gesture 0' >> $DTTWInitFile
+	$BB echo 'chmod 0644 /sys/kernel/touchpanel/dclicknode' >> $DTTWInitFile
+	$BB echo 'write /sys/kernel/touchpanel/dclicknode 0' >> $DTTWInitFile
+	$BB echo 'chmod 0644 /proc/touchpanel/double_tap_enable' >> $DTTWInitFile
+	$BB echo 'write /proc/touchpanel/double_tap_enable 0' >> $DTTWInitFile
+	$BB echo '  exec u:r:init:s0 root root -- /vendor/bin/patch_dttw.sh' >> $DTTWInitFile
+	$BB echo '  exec u:r:su:s0 root root -- /vendor/bin/patch_dttw.sh' >> $DTTWInitFile
+	$BB echo '' >> $DTTWInitFile
+	$BB echo 'on property:sys.boot_completed=1' >> $DTTWInitFile
+	$BB echo 'chmod 0644 /proc/tpd_gesture' >> $DTTWInitFile
+	$BB echo 'write /proc/tpd_gesture 1' >> $DTTWInitFile
+	$BB echo 'chmod 0644 /sys/kernel/touchpanel/dclicknode' >> $DTTWInitFile
+	$BB echo 'write /sys/kernel/touchpanel/dclicknode 1' >> $DTTWInitFile
+	$BB echo 'chmod 0644 /proc/touchpanel/double_tap_enable' >> $DTTWInitFile
+	$BB echo 'write /proc/touchpanel/double_tap_enable 1' >> $DTTWInitFile
+	$BB echo '  exec u:r:init:s0 root root -- /vendor/bin/patch_dttw.sh' >> $DTTWInitFile
+	$BB echo '  exec u:r:su:s0 root root -- /vendor/bin/patch_dttw.sh' >> $DTTWInitFile
+	cp -af $DTTWInitFile /vendor/etc/init/hw/init.forcedttw.rc
+    chmod -R 644 /vendor/etc/init/hw/init.forcedttw.rc
+	cp -af $DTTWScriptFile /vendor/bin/patch_dttw.sh
+    chmod -R 755 /vendor/bin/patch_dttw.sh
+	grep "import /init.forcedttw.rc" /vendor/etc/init/hw/init.qcom.rc >/dev/null | sed -i '/import \/init.forcedttw.rc/d' /vendor/etc/init/hw/init.qcom.rc
+    grep "import init.forcedttw.rc" /vendor/etc/init/hw/init.qcom.rc >/dev/null | sed -i '/import init.forcedttw.rc/d' /vendor/etc/init/hw/init.qcom.rc
+    grep "import /vendor/etc/init/hw/init.forcedttw.rc" /vendor/etc/init/hw/init.qcom.rc >/dev/null || sed -i '1,/.*import.*/s/.*import.*/import \/vendor\/etc\/init\/hw\/init.forcedttw.rc\n&/' /vendor/etc/init/hw/init.qcom.rc
+elif [ "`$BB grep -w "selected.2=3" /tmp/aroma-data/spectrum.prop`" ]; then
+	if [ "$REG" = "IDN" ];then
 	ui_print "- Menghapus Paksaan DT2W ...";
 	elif [ "$REG" = "EN" ];then
 	ui_print "- Removing Forced DT2W ...";
 	fi;
 	if [ -e /vendor/etc/init/hw/init.forcedttw.rc ]; then
 	rm -rf /vendor/etc/init/hw/init.forcedttw.rc
+	rm -rf /vendor/bin/patch_dttw.sh
 	else
 	if [ "$REG" = "IDN" ];then
     ui_print "! Skrip Paksaan DT2W tidak ditemukan. !";
