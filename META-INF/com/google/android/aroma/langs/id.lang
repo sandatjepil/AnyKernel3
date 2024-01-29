@@ -1,4 +1,4 @@
-﻿### LICENSE:
+### LICENSE:
 #
 # Copyright (C) 2011 Ahmad Amarullah ( http://amarullz.com/ )
 #
@@ -79,15 +79,11 @@ perfhal.restoreinfo=Untuk Mengembalikan Perf HAL Lama. Jika sebelumnya Terinstal
 
 add.on=Tambahan
 kernel.about=Tentang Kernel
-kernel.aboutoc=Tentang Kernel Overclock
-kernel.variantinfo=Info Varian
 have.readinfo=Saya telah membaca info ini
 have.understand=OK, Saya Mengerti
 have.understandagree=OK, Saya Mengerti dan Setuju
 check.tocontinue=Centang untuk melanjutkan !
 info.caution=Baca ini dengan seksama
-infooc.caution=Pemberitahuan Kernel OC
-infovariant.caution=Baca ini untuk memastikan Anda tidak salah menginstall Kernel
 spectrum.confirm=Aktifkan dukungan spectrum
 with.spectrum=Install kernel ini dengan dukungan spectrum.
 without.spectrum=Install kernel ini tanpa dukungan spectrum.

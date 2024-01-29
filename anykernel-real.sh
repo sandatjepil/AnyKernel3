@@ -78,10 +78,6 @@ fi;
 if [ $((magisk_patched & 3)) -eq 1 ]; then
 	if [ "$REG" = "IDN" ];then
 	ui_print "! Magisk Terdeteksi, Tidak Perlu Menginstall Magisk lagi !";
-	elif [ "$REG" = "JAV" ];then
-	ui_print "! Magisk Dideteksi, Ora perlu nginstall Magisk maneh !";
-	elif [ "$REG" = "SUN" ];then
-	ui_print "! Magisk Dideteksi, Henteu kedah masang Magisk deui !";
 	elif [ "$REG" = "EN" ];then
 	ui_print "! Magisk Detected, U don't need to reinstall Magisk !";
 	fi;
@@ -210,10 +206,6 @@ elif [ "`$BB grep -w "selected.3=2" /tmp/aroma-data/spectrum.prop`" ];then
 fi
 if [ "$REG" = "IDN" ];then
 ui_print "- SELinux diganti ke: $SELINUXSTATE";
-elif [ "$REG" = "JAV" ];then
-ui_print "- SELinux diganti dadi: $SELINUXSTATE";
-elif [ "$REG" = "SUN" ];then
-ui_print "- SELinux digantikeun ka: $SELINUXSTATE";
 elif [ "$REG" = "EN" ];then
 ui_print "- SELinux switched to: $SELINUXSTATE";
 fi;
@@ -225,7 +217,7 @@ patch_cmdline androidboot.version androidboot.version=$android_ver
 
 # Switch Vibration Type
 NLVib() {
-if [ "$REG" = "IDN" ] || [ "$REG" = "JAV" ] || [ "$REG" = "SUN" ];then
+if [ "$REG" = "IDN" ];then
 ui_print "- Tipe Driver Getaran: NLV";
 elif [ "$REG" = "EN" ];then
 ui_print "- Vibrate Driver Type: NLV";
@@ -235,16 +227,14 @@ patch_cmdline led.vibration led.vibration=0
 
 if [ "`$BB grep -w "selected.2=1" /tmp/aroma-data/refrate.prop`" ];then
 	if [ "$android_ver" -lt "11" ];then
-	if [ "$REG" = "IDN" ] || [ "$REG" = "SUN" ];then
+	if [ "$REG" = "IDN" ];then
 	ui_print "! Versi Android tidak didukung untuk LV. NLV diatur sebagai default !";
-	elif [ "$REG" = "JAV" ];then
-	ui_print "! Versi Android ora didukung kanggo LV. NLV disetel minangka standar !";
 	elif [ "$REG" = "EN" ];then
 	ui_print "! Unsupported Android Version for LV. NLV is set as default !";
 	fi;
 	NLVib
 	else
-	if [ "$REG" = "IDN" ] || [ "$REG" = "JAV" ] || [ "$REG" = "SUN" ];then
+	if [ "$REG" = "IDN" ];then
 	ui_print "- Tipe Driver Getaran: LV";
 	elif [ "$REG" = "EN" ];then
 	ui_print "- Vibrate Driver Type: LV";
@@ -259,7 +249,7 @@ fi;
 if [ "`$BB grep -w "selected.1=1" /tmp/aroma-data/refrate.prop`" ] || [ "`$BB grep -w "selected.1=2" /tmp/aroma-data/refrate.prop`" ] && [ -z "$WITHMAGISK" ];then
 if [ "`$BB grep -w "selected.1=2" /tmp/aroma-data/refrate.prop`" ];then
 patch_cmdline kernelsu.safemode kernelsu.safemode=1
-if [ "$REG" = "IDN" ] || [ "$REG" = "SUN" ] || [ "$REG" = "JAV" ];then
+if [ "$REG" = "IDN" ];then
 KSUSAFEMODE=" (Mode Aman)"
 elif [ "$REG" = "EN" ];then
 KSUSAFEMODE=" (Safe Mode)"
@@ -271,10 +261,6 @@ fi;
 
 if [ "$REG" = "IDN" ];then
 ui_print "- KernelSU dihidupkan$KSUSAFEMODE !";
-elif [ "$REG" = "JAV" ];then
-ui_print "- KernelSU diuripke$KSUSAFEMODE !";
-elif [ "$REG" = "SUN" ];then
-ui_print "- KernelSU diaktifkeun$KSUSAFEMODE !";
 elif [ "$REG" = "EN" ];then
 ui_print "- KernelSU enabled$KSUSAFEMODE !";
 fi;
@@ -283,20 +269,12 @@ else
 if [ ! -z "$WITHMAGISK" ];then
 if [ "$REG" = "IDN" ];then
 ui_print "- KernelSU dimatikan karena Magisk Terinstall !";
-elif [ "$REG" = "JAV" ];then
-ui_print "- KernelSU dipateni amarga Magisk dipasang !";
-elif [ "$REG" = "SUN" ];then
-ui_print "- KernelSU dinon-aktifkeun disebabkeun Magisk dipasang !";
 elif [ "$REG" = "EN" ];then
 ui_print "- KernelSU disabled due Magisk is Installed !";
 fi;
 else
 if [ "$REG" = "IDN" ];then
 ui_print "- KernelSU dimatikan !";
-elif [ "$REG" = "JAV" ];then
-ui_print "- KernelSU dipateni !";
-elif [ "$REG" = "SUN" ];then
-ui_print "- KernelSU dinon-aktifkeun !";
 elif [ "$REG" = "EN" ];then
 ui_print "- KernelSU disabled !";
 fi;

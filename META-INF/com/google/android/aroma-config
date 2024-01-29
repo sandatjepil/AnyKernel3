@@ -1,4 +1,4 @@
-﻿### LICENSE:
+### LICENSE:
 #
 # Copyright (C) 2011 Ahmad Amarullah ( http://amarullz.com/ )
 #
@@ -47,8 +47,6 @@ selectbox(
     "Language","<@center><b>\nSelect Language:</b>\n\n</@>","@language","lang.prop",
     "English",	"Use Default English Language.", 1,	        #-- selected.0 = 1     
     "Indonesia",	"Gunakan Bahasa Indonesia.", 0, 	        #-- selected.0 = 2
-    "Jawa",	"Nggo Boso Jowo.", 0, 	        #-- selected.0 = 3
-    "Sunda",	"Anggo Basa Sundana.", 0 	        #-- selected.0 = 4
 );
 
 if prop("lang.prop","selected.0")=="1" then
@@ -57,14 +55,6 @@ endif;
 
 if prop("lang.prop","selected.0")=="2" then
   loadlang("langs/id.lang");
-endif;
-
-if prop("lang.prop","selected.0")=="3" then
-  loadlang("langs/jav.lang");
-endif;
-
-if prop("lang.prop","selected.0")=="4" then
-  loadlang("langs/sun.lang");
 endif;
 
 ##############################################
@@ -77,7 +67,7 @@ viewbox(
 	  ini_get("rom_name")+
 	"</b> <~common.for> <b>"+ini_get("rom_device")+"</b>.\n\n\n\n\n"+
 	
-      "  <#textfg><~welcome.version>\t\t\t: <b>"+ini_get("rom_version")+"</b>\n\n"+
+      "  <#textfg><~welcome.version>\t\t: <b>"+ini_get("rom_version")+"</b>\n\n"+
       "  <~welcome.author>\t\t: <b>"+ini_get("rom_author")+"</b>\n\n"+
       "  <~welcome.builddate>\t\t: <b>"+ini_get("rom_date")+"</b>\n\n"+
       "  <~welcome.buildvariant>\t\t: <b>KVARIANT</b>\n\n\n"+
@@ -110,8 +100,6 @@ menubox(
 	"<~forcedttw>", "<~forceenable.dttw>", "@pen", #-- selected = 3
 	"<~patch.ram>", "<~patchraminfo>", "@apps", #-- selected = 4
     "<~kernel.about>",    "",    "@info",    #-- selected = 5
-	"<~kernel.aboutoc>",    "",    "@alert",    #-- selected = 6
-	"<~kernel.variantinfo>",    "",    "@info"    #-- selected = 7
 );																															
 
 writetmpfile(
@@ -133,72 +121,6 @@ textbox(
   #-- Text Content 
     resread("kernel_info.txt")
 	);
-back("1");
-endif;
-
-if prop("menu.prop","selected")=="6" then
-ini_set("text_next", "");
-textbox(
-  #-- Title
-    "<~kernel.aboutoc>",
-  #-- Subtitle / Description
-    "<~infooc.caution>",
-  #-- Icon:
-    "@info",
-  #-- Text Content 
-    resread("kernel_OC.txt")
-);
-back("1");
-endif;
-
-if prop("menu.prop","selected")=="7" then
-
-menubox(
-  #-- Title
-    "<~kernel.variantinfo>",
-  
-  #-- Description
-    "<~select.language>",
-  
-  #-- Icon
-    "@language",
-    
-  #-- Property
-    "varlang.prop",
-    
-  #-------------------------+------------------------------+-------------#
-  # TITLE                   | DESCRIPTION                  | ICON        #
-  #-------------------------+------------------------------+-------------#
-  
-    "ENGLISH",    "",    "@public",    #-- selected = 1
-    "INDONESIA",    "",    "@public"    #-- selected = 2
-);
-
-if prop("varlang.prop","selected")=="1" then
-ini_set("text_next", "");
-textbox(
-  #-- Title
-    "<~kernel.variantinfo>",
-  #-- Subtitle / Description
-    "<~infovariant.caution>",
-  #-- Icon:
-    "@info",
-  #-- Text Content 
-    resread("kernel_variant.txt")
-	);
-else
-ini_set("text_next", "");
-textbox(
-  #-- Title
-    "<~kernel.variantinfo>",
-  #-- Subtitle / Description
-    "<~infovariant.caution>",
-  #-- Icon:
-    "@info",
-  #-- Text Content 
-    resread("kernel_variant_id.txt")
-	);
-endif;
 back("1");
 endif;
 
