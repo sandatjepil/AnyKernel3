@@ -775,7 +775,7 @@ elif [ "`$BB grep -w "selected.2=2" /tmp/aroma-data/spectrum.prop`" ]; then
 	$BB echo '  exec u:r:init:s0 root root -- /vendor/bin/patch_dttw.sh' >> $DTTWInitFile
 	$BB echo '  exec u:r:su:s0 root root -- /vendor/bin/patch_dttw.sh' >> $DTTWInitFile
 	$BB echo '' >> $DTTWInitFile
-	$BB echo 'on property:sys.boot_completed=0' >> $DTTWInitFile
+	$BB echo 'on property:sys.boot_completed=1' >> $DTTWInitFile
 	$BB echo 'chmod 0644 /proc/tpd_gesture' >> $DTTWInitFile
 	$BB echo 'write /proc/tpd_gesture 0' >> $DTTWInitFile
 	$BB echo 'chmod 0644 /sys/kernel/touchpanel/dclicknode' >> $DTTWInitFile
@@ -1030,7 +1030,7 @@ do_devicecheck;
 do_versioncheck;
 do_levelcheck;
 
-if [ "`$BB grep -w "selected.4=1" /tmp/aroma-data/refrate.prop`" ];then
+if [ "`$BB grep -w "selected.2=1" /tmp/aroma-data/overclock.prop`" ];then
 	if [ "$REG" = "IDN" ];then
 	ui_print "- Mencadangkan Boot.img...";
 	elif [ "$REG" = "EN" ];then

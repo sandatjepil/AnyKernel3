@@ -431,11 +431,8 @@ selectbox(
 		  "68Hz",    "",    0,    #-- selected.3 = 9
 		  "69Hz",    "",    0,    #-- selected.3 = 10
 		  "70Hz",    "",    0,    #-- selected.3 = 11
-		  "72Hz",    "",    0,    #-- selected.3 = 12
+		  "72Hz",    "",    0    #-- selected.3 = 12
         
-        "<~backup.boot> ?",        "",                              2,  #-- Group 4. key = "selected.4"
-          "<~text_yes>",    "<~dobackup.boot>",    0,    #-- selected.4 = 1
-          "<~text_no>",    "<~dontbackup.boot>",    1    #-- selected.4 = 2
 );
 
 selectbox(
@@ -452,10 +449,15 @@ selectbox(
       # TITLE                         | DESCRIPTION                  | VALUE #
       #-------------------------------+------------------------------+-------#
 		  
-		"<~fastcharging.dialog> ?",        "",                              2,  #-- Group 3. key = "selected.3"
-		  "<~text_yes>, (<~mode> 1)",    "<~fastcharging.info>",    0,    #-- selected.3 = 1
-          "<~text_yes>, (<~mode> 2)",    "<~superfastcharging.info>",    0,    #-- selected.3 = 2
-		  "<~text_no>",    "<~nofastcharging.info>",    1    #-- selected.3 = 3
+		"<~fastcharging.dialog> ?",        "",                              2,  #-- Group 1. key = "selected.1"
+		  "<~text_yes>, (<~mode> 1)",    "<~fastcharging.info>",    0,    #-- selected.1 = 1
+          "<~text_yes>, (<~mode> 2)",    "<~superfastcharging.info>",    0,    #-- selected.1 = 2
+		  "<~text_no>",    "<~nofastcharging.info>",    1,    #-- selected.1 = 3
+		  
+		"<~backup.boot> ?",        "",                              2,  #-- Group 2. key = "selected.2"
+          "<~text_yes>",    "<~dobackup.boot>",    0,    #-- selected.2 = 1
+          "<~text_no>",    "<~dontbackup.boot>",    1    #-- selected.2 = 2
+
 );
 	
 ini_set("text_next", "<~text_install>");
