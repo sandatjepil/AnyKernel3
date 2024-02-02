@@ -41,16 +41,16 @@ patch_vbmeta_flag=auto;
 dump_boot; # use split_boot to skip ramdisk unpack, e.g. for devices with init_boot ramdisk
 
 # Check if boot img has Magisk Patched
-cd $split_img;
-if [ ! "$magisk_patched" ]; then
-  $bin/magiskboot cpio ramdisk.cpio test;
-  magisk_patched=$?;
-fi;
-if [ $((magisk_patched & 3)) -eq 1 ]; then
-	ui_print "! Magisk Detected, U don't need to reinstall Magisk !";
-	WITHMAGISK=Y
-fi;
-cd $home
+# cd $split_img;
+# if [ ! "$magisk_patched" ]; then
+  # $bin/magiskboot cpio ramdisk.cpio test;
+  # magisk_patched=$?;
+# fi;
+# if [ $((magisk_patched & 3)) -eq 1 ]; then
+	# ui_print "! Magisk Detected, U don't need to reinstall Magisk !";
+	# WITHMAGISK=Y
+# fi;
+# cd $home
 
 # begin ramdisk changes
 
@@ -163,21 +163,21 @@ if [ ! -f /vendor/etc/powerhint.xml ]; then
 fi
 
 # Put Android Version on cmdline
-android_ver=$(file_getprop /system/build.prop ro.build.version.release);
-patch_cmdline androidboot.version androidboot.version=$android_ver
+# android_ver=$(file_getprop /system/build.prop ro.build.version.release);
+# patch_cmdline androidboot.version androidboot.version=$android_ver
 
 # Switch Vibration Type
-NLVib() {
-ui_print "- Vibrate Driver Type: NLV";
-patch_cmdline led.vibration led.vibration=0
-}
+# NLVib() {
+# ui_print "- Vibrate Driver Type: NLV";
+# patch_cmdline led.vibration led.vibration=0
+# }
 
-if [ "$android_ver" -lt "11" ];then
-NLVib
-else
-ui_print "- Vibrate Driver Type: LV";
-patch_cmdline led.vibration led.vibration=1
-fi;
+# if [ "$android_ver" -lt "11" ];then
+# NLVib
+# else
+# ui_print "- Vibrate Driver Type: LV";
+# patch_cmdline led.vibration led.vibration=1
+# fi;
 
 # end ramdisk changes
 
