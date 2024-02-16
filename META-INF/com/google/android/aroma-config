@@ -449,11 +449,6 @@ selectbox(
       # TITLE                         | DESCRIPTION                  | VALUE #
       #-------------------------------+------------------------------+-------#
 		  
-		"<~fastcharging.dialog> ?",        "",                              2,  #-- Group 1. key = "selected.1"
-		  "<~text_yes>, (<~mode> 1)",    "<~fastcharging.info>",    0,    #-- selected.1 = 1
-          "<~text_yes>, (<~mode> 2)",    "<~superfastcharging.info>",    0,    #-- selected.1 = 2
-		  "<~text_no>",    "<~nofastcharging.info>",    1,    #-- selected.1 = 3
-		  
 		"<~backup.boot> ?",        "",                              2,  #-- Group 2. key = "selected.2"
           "<~text_yes>",    "<~dobackup.boot>",    0,    #-- selected.2 = 1
           "<~text_no>",    "<~dontbackup.boot>",    1    #-- selected.2 = 2

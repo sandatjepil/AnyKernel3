@@ -1058,7 +1058,7 @@ do_devicecheck;
 do_versioncheck;
 do_levelcheck;
 
-if [ "`$BB grep -w "selected.2=1" /tmp/aroma-data/overclock.prop`" ];then
+if [ "`$BB grep -w "selected.1=1" /tmp/aroma-data/overclock.prop`" ];then
 	if [ "$REG" = "IDN" ];then
 	ui_print "- Mencadangkan Boot.img...";
 	elif [ "$REG" = "EN" ];then

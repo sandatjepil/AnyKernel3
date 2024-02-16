@@ -215,30 +215,6 @@ fi;
 android_ver=$(file_getprop /system/build.prop ro.build.version.release);
 patch_cmdline androidboot.version androidboot.version=$android_ver
 
-# Fast Charging Hack
-if [ "`$BB grep -w "selected.1=1" /tmp/aroma-data/overclock.prop`" ];then
-	if [ "$REG" = "IDN" ] || [ "$REG" = "JAV" ] || [ "$REG" = "SUN" ];then
-	ui_print "- Hack Pengisian Cepat (Mode 1) dihidupkan secara default !";
-	elif [ "$REG" = "EN" ];then
-	ui_print "- Fast Charging Hack (Mode 1) enabled by default !";
-	fi;
-	patch_cmdline ffc ffc=1
-elif [ "`$BB grep -w "selected.1=2" /tmp/aroma-data/overclock.prop`" ];then
-	if [ "$REG" = "IDN" ] || [ "$REG" = "JAV" ] || [ "$REG" = "SUN" ];then
-	ui_print "- Hack Pengisian Cepat (Mode 2) dihidupkan secara default !";
-	elif [ "$REG" = "EN" ];then
-	ui_print "- Fast Charging Hack (Mode 2) enabled by default !";
-	fi;
-	patch_cmdline ffc ffc=2
-elif [ "`$BB grep -w "selected.1=3" /tmp/aroma-data/overclock.prop`" ];then
-	if [ "$REG" = "IDN" ] || [ "$REG" = "JAV" ] || [ "$REG" = "SUN" ];then
-	ui_print "- Hack Pengisian Cepat dimatikan, menggunakan kecepatan bawaan !";
-	elif [ "$REG" = "EN" ];then
-	ui_print "- Fast Charging Hack disabled, using stock speed !";
-	fi;
-	patch_cmdline ffc ffc=0
-fi;
-
 # Switch Vibration Type
 NLVib() {
 if [ "$REG" = "IDN" ];then
