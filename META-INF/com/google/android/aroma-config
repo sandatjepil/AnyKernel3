@@ -419,40 +419,11 @@ selectbox(
           "LV",    "<~ledvib.info>",    1,    #-- selected.2 = 1
           "NLV",    "<~nonledvib.info>",    0,    #-- selected.2 = 2
 		
-		"<~refresh.rate>",        "",                              2,  #-- Group 3. key = "selected.3"
-          "48Hz",    "",    0,    #-- selected.3 = 1
-		  "50Hz",    "",    0,    #-- selected.3 = 2
-		  "55Hz",    "",    0,    #-- selected.3 = 3
-		  "60Hz (Default)",    "",    1,    #-- selected.3 = 4
-          "62Hz",    "",    0,    #-- selected.3 = 5
-		  "64Hz",    "",    0,    #-- selected.3 = 6
-		  "65Hz",    "",    0,    #-- selected.3 = 7
-		  "67Hz",    "",    0,    #-- selected.3 = 8
-		  "68Hz",    "",    0,    #-- selected.3 = 9
-		  "69Hz",    "",    0,    #-- selected.3 = 10
-		  "70Hz",    "",    0,    #-- selected.3 = 11
-		  "72Hz",    "",    0    #-- selected.3 = 12
-        
-);
+		"<~backup.boot> ?",        "",                              2,  #-- Group 3. key = "selected.2"
+          "<~text_yes>",    "<~dobackup.boot>",    0,    #-- selected.3 = 1
+          "<~text_no>",    "<~dontbackup.boot>",    1    #-- selected.3 = 2
 
-selectbox(
-      #-- Title
-        "",
-      #-- Description
-        "<~add.on>",
-      #-- Icon
-        "@extension",
-      #-- Property
-        "overclock.prop",
         
-      #-------------------------------+------------------------------+-------#
-      # TITLE                         | DESCRIPTION                  | VALUE #
-      #-------------------------------+------------------------------+-------#
-		  
-		"<~backup.boot> ?",        "",                              2,  #-- Group 2. key = "selected.2"
-          "<~text_yes>",    "<~dobackup.boot>",    0,    #-- selected.2 = 1
-          "<~text_no>",    "<~dontbackup.boot>",    1    #-- selected.2 = 2
-
 );
 	
 ini_set("text_next", "<~text_install>");
