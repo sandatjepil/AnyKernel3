@@ -225,7 +225,7 @@ fi;
 patch_cmdline led.vibration led.vibration=0
 }
 
-if [ "`$BB grep -w "selected.2=1" /tmp/aroma-data/refrate.prop`" ];then
+if [ "`$BB grep -w "selected.1=1" /tmp/aroma-data/refrate.prop`" ];then
 	if [ "$android_ver" -lt "11" ];then
 	if [ "$REG" = "IDN" ];then
 	ui_print "! Versi Android tidak didukung untuk LV. NLV diatur sebagai default !";
@@ -246,33 +246,33 @@ else
 fi;
 
 # KernelSU Support
-if [ "`$BB grep -w "selected.1=1" /tmp/aroma-data/refrate.prop`" ] || [ "`$BB grep -w "selected.1=2" /tmp/aroma-data/refrate.prop`" ];then
-if [ "`$BB grep -w "selected.1=2" /tmp/aroma-data/refrate.prop`" ];then
-patch_cmdline kernelsu.safemode kernelsu.safemode=1
-if [ "$REG" = "IDN" ];then
-KSUSAFEMODE=" (Mode Aman)"
-elif [ "$REG" = "EN" ];then
-KSUSAFEMODE=" (Safe Mode)"
-fi;
-else
-patch_cmdline kernelsu.safemode kernelsu.safemode=0
-KSUSAFEMODE=""
-fi;
+# if [ "`$BB grep -w "selected.1=1" /tmp/aroma-data/refrate.prop`" ] || [ "`$BB grep -w "selected.1=2" /tmp/aroma-data/refrate.prop`" ];then
+# if [ "`$BB grep -w "selected.1=2" /tmp/aroma-data/refrate.prop`" ];then
+# patch_cmdline kernelsu.safemode kernelsu.safemode=1
+# if [ "$REG" = "IDN" ];then
+# KSUSAFEMODE=" (Mode Aman)"
+# elif [ "$REG" = "EN" ];then
+# KSUSAFEMODE=" (Safe Mode)"
+# fi;
+# else
+# patch_cmdline kernelsu.safemode kernelsu.safemode=0
+# KSUSAFEMODE=""
+# fi;
 
-if [ "$REG" = "IDN" ];then
-ui_print "- KernelSU dihidupkan$KSUSAFEMODE !";
-elif [ "$REG" = "EN" ];then
-ui_print "- KernelSU enabled$KSUSAFEMODE !";
-fi;
-patch_cmdline kernelsu.enabled kernelsu.enabled=1
-else
-if [ "$REG" = "IDN" ];then
-ui_print "- KernelSU dimatikan !";
-elif [ "$REG" = "EN" ];then
-ui_print "- KernelSU disabled !";
-fi;
-patch_cmdline kernelsu.enabled kernelsu.enabled=0
-fi
+# if [ "$REG" = "IDN" ];then
+# ui_print "- KernelSU dihidupkan$KSUSAFEMODE !";
+# elif [ "$REG" = "EN" ];then
+# ui_print "- KernelSU enabled$KSUSAFEMODE !";
+# fi;
+# patch_cmdline kernelsu.enabled kernelsu.enabled=1
+# else
+# if [ "$REG" = "IDN" ];then
+# ui_print "- KernelSU dimatikan !";
+# elif [ "$REG" = "EN" ];then
+# ui_print "- KernelSU disabled !";
+# fi;
+# patch_cmdline kernelsu.enabled kernelsu.enabled=0
+# fi
 
 # end ramdisk changes
 

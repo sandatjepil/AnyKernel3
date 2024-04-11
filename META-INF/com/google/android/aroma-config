@@ -409,19 +409,14 @@ selectbox(
       #-------------------------------+------------------------------+-------#
       # TITLE                         | DESCRIPTION                  | VALUE #
       #-------------------------------+------------------------------+-------#
-    
-        "<~kernelsu.dialog> ?",        "",                              2,  #-- Group 1. key = "selected.1"
-          "<~text_yes>",    "<~kernelsuenable.info>",    1,    #-- selected.1 = 1
-		  "<~text_yes>, (<~safe.mode>)",    "<~kernelsuenablesafe.info>",    0,    #-- selected.1 = 2
-          "<~text_no>",    "<~kernelsudisable.info>",    0,    #-- selected.1 = 3
+    		
+		"<~vibtype.select> :",        "",                              2,  #-- Group 1. key = "selected.2"
+          "LV",    "<~ledvib.info>",    0,    #-- selected.1 = 1
+          "NLV",    "<~nonledvib.info>",    1,    #-- selected.1 = 2
 		
-		"<~vibtype.select> :",        "",                              2,  #-- Group 2. key = "selected.2"
-          "LV",    "<~ledvib.info>",    1,    #-- selected.2 = 1
-          "NLV",    "<~nonledvib.info>",    0,    #-- selected.2 = 2
-		
-		"<~backup.boot> ?",        "",                              2,  #-- Group 3. key = "selected.2"
-          "<~text_yes>",    "<~dobackup.boot>",    0,    #-- selected.3 = 1
-          "<~text_no>",    "<~dontbackup.boot>",    1    #-- selected.3 = 2
+		"<~backup.boot> ?",        "",                              2,  #-- Group 2. key = "selected.2"
+          "<~text_yes>",    "<~dobackup.boot>",    0,    #-- selected.2 = 1
+          "<~text_no>",    "<~dontbackup.boot>",    1    #-- selected.2 = 2
 
         
 );
