@@ -48,43 +48,27 @@ mount -o remount,rw /vendor;
 
 ## AnyKernel file attributes
 # set permissions/ownership for included ramdisk files
-chmod -R 750 $ramdisk/*;
-chmod -R 755 $ramdisk/sbin;
-chmod -R root:root $ramdisk/*;
+chmod -R 750 $RAMDISK/*;
+chmod -R 755 $RAMDISK/sbin;
+chmod -R root:root $RAMDISK/*;
 # end attributes
 
 ## AnyKernel install
 dump_boot;
 
-# Check if boot img has Magisk Patched
-cd $split_img;
-if [ ! "$magisk_patched" ]; then
-  $bin/magiskboot cpio ramdisk.cpio test;
-  magisk_patched=$?;
-fi;
-if [ $((magisk_patched & 3)) -eq 1 ]; then
-	if [ "$REG" = "IDN" ];then
-	ui_print "! Magisk Terdeteksi, Tidak Perlu Menginstall Magisk lagi !";
-	elif [ "$REG" = "EN" ];then
-	ui_print "! Magisk Detected, U don't need to reinstall Magisk !";
-	fi;
-	WITHMAGISK=Y
-fi;
-cd $home
-
 # begin ramdisk changes
 
 #Remove old kernel stuffs from ramdisk
-rm -rf $ramdisk/init.special_power.sh
-rm -rf $ramdisk/init.darkonah.rc
-rm -rf $ramdisk/init.spectrum.rc
-rm -rf $ramdisk/init.spectrum.sh
-rm -rf $ramdisk/init.boost.rc
-rm -rf $ramdisk/init.trb.rc
-rm -rf $ramdisk/init.azure.rc
-rm -rf $ramdisk/init.PBH.rc
-rm -rf $ramdisk/init.Pbh.rc
-rm -rf $ramdisk/init.overdose.rc
+rm -rf $RAMDISK/init.special_power.sh
+rm -rf $RAMDISK/init.darkonah.rc
+rm -rf $RAMDISK/init.spectrum.rc
+rm -rf $RAMDISK/init.spectrum.sh
+rm -rf $RAMDISK/init.boost.rc
+rm -rf $RAMDISK/init.trb.rc
+rm -rf $RAMDISK/init.azure.rc
+rm -rf $RAMDISK/init.PBH.rc
+rm -rf $RAMDISK/init.Pbh.rc
+rm -rf $RAMDISK/init.overdose.rc
 
 backup_file init.rc;
 
