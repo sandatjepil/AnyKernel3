@@ -145,38 +145,8 @@ else
 	NLVib
 fi;
 
-# Overclock CPU & GPU
-if [ "`$BB grep -w "selected.1=1" /tmp/aroma-data/overclock.prop`" ];then
-	if [ "$REG" = "IDN" ];then
-	ui_print "- CPU di-Overclock";
-	elif [ "$REG" = "EN" ];then
-	ui_print "- Overclock CPU Freq";
-	fi;
-	patch_cmdline overclock.cpu overclock.cpu=1
-elif [ "`$BB grep -w "selected.1=2" /tmp/aroma-data/overclock.prop`" ];then
-	if [ "$REG" = "IDN" ];then
-	ui_print "- CPU tidak di-Overclock";
-	elif [ "$REG" = "EN" ];then
-	ui_print "- Use Stock CPU Freq";
-	fi;
-	patch_cmdline overclock.cpu overclock.cpu=0
-fi;
-
-if [ "`$BB grep -w "selected.2=1" /tmp/aroma-data/overclock.prop`" ];then
-	if [ "$REG" = "IDN" ];then
-	ui_print "- GPU di-Overclock";
-	elif [ "$REG" = "EN" ];then
-	ui_print "- Overclock GPU Freq";
-	fi;
-	patch_cmdline overclock.gpu overclock.gpu=1
-elif [ "`$BB grep -w "selected.2=2" /tmp/aroma-data/overclock.prop`" ];then
-	if [ "$REG" = "IDN" ];then
-	ui_print "- GPU tidak di-Overclock";
-	elif [ "$REG" = "EN" ];then
-	ui_print "- Use Stock GPU Freq";
-	fi;
-	patch_cmdline overclock.gpu overclock.gpu=0
-fi;
+# patch_cmdline overclock.cpu overclock.cpu=0
+# patch_cmdline overclock.gpu overclock.gpu=0
 
 # end ramdisk changes
 
